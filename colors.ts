@@ -2,7 +2,7 @@ module.exports = {
     primary: '#EDCEA8',
     secondary: '#D9A462',
     background: '#F5F5F5',
-    foreground: '#333333',
+    foreground: '#000000ff',
     card: '#FFFFFF',
     cardForeground: '#000000',
     radius: {
