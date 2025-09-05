@@ -29,7 +29,6 @@ function Button({
     variant = "primary",
     size,
     children,
-    ...props
 }: ButtonProps){
     const variantClass = buttonVariants[variant] || buttonVariants.primary;
     const variantTextClass = textVariants[variant] || textVariants.primary;
