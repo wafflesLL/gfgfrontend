@@ -1,33 +1,62 @@
-import { Button } from "@/components/ui/Button";
 import { TextArea } from "@/components/ui/TextArea";
-import { View, Text } from "react-native";
-import { Link, Stack } from "expo-router";
-export default function About(){
+import { Text, View, Button} from "react-native"
+import { useForm, Controller } from "react-hook-form"
 
+export default function About(){
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        defaultValues: {
+        email: "",
+        password: "",
+        },
+    })
+    interface FormData {
+        email: string;
+        password: string;
+    }
+
+    const onSubmit = (data: FormData) => console.log(data);
     return(
-        <View className="bg-primary flex-1 justify-center gap-20 items-center">
-            <Stack.Screen
-                options={{
-                    animation: "slide_from_bottom",
-                    animationDuration: 300, 
+        <View className="bg-primary flex-1 items-center justify-center gap-4 px-10">
+            <Controller
+                control={control}
+                rules={{
+                required: true,
                 }}
-            />
-            <Text className="text-5xl font-semibold">Sign In!</Text>
-            <View className="gap-6 px-20 object-contain w-screen items-center">
-                <TextArea
-                    className="text-2xl"
-                    autoComplete="email"
-                    keyboardType="email-address"
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextArea 
                     title="Email Address"
+                    className="text-xl"
                 />
-                <TextArea
-                    className="text-2xl"
-                    autoComplete="current-password"
+                )}
+                name="email"
+            />
+            {errors.email && <Text>This is required.</Text>}
+
+            <Controller
+                control={control}
+                rules={{
+                    maxLength: 100,
+                    required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextArea 
                     Password={true}
                     title="Password"
+                    className="text-xl"
+                
                 />
-                <Button className="w-full">Submit</Button> 
-            </View>
+
+                )}
+                name="password"
+            />
+            {errors.password && <Text>This is required.</Text>}
+            
+
+            <Button title="Submit" onPress={handleSubmit(onSubmit)} />
         </View>
     );
 }
