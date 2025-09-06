@@ -17,6 +17,7 @@ interface TextAreaProps {
     keyboardType?: keyboards;
     autoCapitalize?: autoCapitalizes;
     value?: string;
+    onChange?: (text: string) => void;
 }
 //reference https://reactnative.dev/docs/textinput
 
@@ -32,8 +33,8 @@ function TextArea({
     keyboardType = 'default',
     autoCapitalize = 'none',
     value = "", 
+    onChange = (text: string) => {""},
 }:TextAreaProps){
-    const [text, setText] = useState('');
     return(
         <View className="flex flex-col items-left gap-2 w-full">
             <Text className={`${className} font-bold`}>{title}</Text>
@@ -41,8 +42,8 @@ function TextArea({
                 <TextInput
                     multiline={multiline} // This prop enables multi-line input
                     numberOfLines={numberOfLines}
-                    onChangeText={setText}
-                    value={text ?? value}
+                    onChangeText={onChange}
+                    value={value}
                     placeholder={placeholder}
                     className={`${className} leading-tight`}
                     autoComplete={autoComplete}
