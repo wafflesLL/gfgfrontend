@@ -2,16 +2,19 @@ import { TextArea } from "@/components/ui/TextArea";
 import { Text, View, Button} from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SignInData, SignInSchema } from "@/types";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function About(){
     const {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<SignInData>({
+        resolver: zodResolver(SignInSchema),
         defaultValues: {
-        email: "",
-        password: "",
+            email: "",
+            password: "",
         },
     })
     interface FormData {
@@ -22,7 +25,7 @@ export default function About(){
     const onSubmit = (data: FormData) => console.log(data);
     return(
         <SafeAreaProvider>
-            <SafeAreaView className="flex-1 bg-primary gap-8">
+            <SafeAreaView className="flex-1 bg-primary gap-8 py-8">
                 <Text className="w-screen text-center font-semibold text-5xl">Sign In</Text>
                 <View className="flex-1 items-center gap-4 px-10">
                     <Controller
@@ -40,7 +43,7 @@ export default function About(){
                         )}
                         name="email"
                     />
-                    {errors.email && <Text className="text-warning">This is required.</Text>}
+                    {errors.email && <Text className="text-warning">Enter a valid email.</Text>}
 
                     <Controller
                         control={control}
@@ -59,7 +62,7 @@ export default function About(){
                         )}
                         name="password"
                     />
-                    {errors.password && <Text className="text-warning">This is required.</Text>}
+                    {errors.password && <Text className="text-warning">Password is required.</Text>}
 
                     <Button title="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>
