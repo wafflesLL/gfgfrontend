@@ -2,7 +2,7 @@ import { TextArea } from "@/components/ui/TextArea";
 import { Text, View } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { SignInData, SignInSchema } from "@/types";
+import { SignInData, SignInSchema } from "@/lib/types";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
 import { Stack } from 'expo-router';

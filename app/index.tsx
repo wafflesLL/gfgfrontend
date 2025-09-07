@@ -1,12 +1,41 @@
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Button } from '@/components/ui/Button';
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
+import { apiFetch } from '@/lib/server';
+import { useState, useEffect } from 'react';
+import { ApiResponse } from '@/lib/types';
 
 export default function Home() {
-    console.log('Home screen rendered');
+    const [data, setData] = useState<ApiResponse | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await apiFetch("/test");
+                const result = await response.json();
+                setData(result as ApiResponse);
+            } catch (err) {
+                console.error("Failed to fetch data:", err);
+                setError(err instanceof Error ? err : new Error(String(err)));
+            }
+        }
+
+        fetchData();
+    }, []); // Empty dependency array means this runs once on mount
+
+    if (error) {
+        return (
+            <View className="flex-1 items-center justify-center">
+                <Text className="text-red-500">Error: {error.message}</Text>
+            </View>
+        );
+    }else{
+        console.log(data);
+    }
+
     return(
         <SafeAreaProvider>
             <SafeAreaView className="flex-1 bg-primary py-8">

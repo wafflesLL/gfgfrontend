@@ -10,3 +10,9 @@ export const SignInSchema = z.object({
 });
 
 export type SignInData = z.infer<typeof SignInSchema>;
+
+export interface ApiResponse {
+    // Add properties based on your API response structure
+    id: string;
+    // ... other properties
+}
