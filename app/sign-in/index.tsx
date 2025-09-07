@@ -1,9 +1,10 @@
 import { TextArea } from "@/components/ui/TextArea";
-import { Text, View, Button} from "react-native"
+import { Text, View } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { SignInData, SignInSchema } from "@/types";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/Button';
 
 export default function About(){
     const {
@@ -64,7 +65,7 @@ export default function About(){
                     />
                     {errors.password && <Text className="text-warning">Password is required.</Text>}
 
-                    <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+                    <Button onPress={handleSubmit(onSubmit)} />
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>

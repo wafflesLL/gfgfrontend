@@ -16,7 +16,7 @@ export default function Home() {
                             headerShown: false,
                         }}
                     />
-                    <View className="mx-20 items-center gap-4">
+                    <View className={`w-[70vw] items-center gap-4`}>
                         <Text className="text-5xl text-center font-semibold leading-tight">Glasses For Good</Text>
                         <View className="my-4">
                             <Image
@@ -25,12 +25,28 @@ export default function Home() {
                                 contentFit="cover"
                             />
                         </View>
-                        <Link href="/sign-in">
-                            <Button className="text-3xl w-screen">Sign In</Button>
-                        </Link>
-                        <Link href="/create-account">
-                            <Button className="text-3xl w-screen">Create Account</Button>
-                        </Link>
+                        <Button
+                            accessibilityLabel="This button directs to the Sign In screen"
+                            className="w-full"
+                        >
+                            <Link
+                                href="/sign-in"
+                                className="text-3xl font-semibold"
+                            >
+                                Sign In
+                            </Link>
+                        </Button>
+                        <Button
+                            accessibilityLabel="This button directs to the Create Account screen"
+                            className="w-full"
+                        >
+                            <Link
+                                href="/create-account"
+                                className="text-3xl font-semibold"
+                            >
+                                Create Account
+                            </Link>
+                        </Button>
                     </View>
                 </View>
             </SafeAreaView>
