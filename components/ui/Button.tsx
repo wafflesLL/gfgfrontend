@@ -1,11 +1,13 @@
-import { View, TouchableOpacityProps, TouchableOpacity} from "react-native";
+import { View, TouchableOpacityProps, TouchableOpacity, Text} from "react-native";
+import { Link } from "expo-router";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
 
-interface ButtonProps extends TouchableOpacityProps{
+interface ButtonProps extends TouchableOpacityProps {
     variant?: ButtonVariant;
     className?: string;
     size?: string;
+    href?: string;
 }
 
 const buttonVariants: Record<ButtonVariant, string> = {
@@ -19,14 +21,30 @@ function Button({
     className,
     variant = "primary",
     size,
+    href,
     ...props
-}: ButtonProps){
+}: ButtonProps) {
     const variantClass = buttonVariants[variant] || buttonVariants.primary;
-    return (
-        <View className={`${variantClass} ${className} p-[${size}]items-center justify-center`}>
-            <TouchableOpacity {...props}/>
-       </View>
+
+    const output = (
+        <TouchableOpacity className={`${variantClass} ${className} p-[${size}]`} {...props}>
+            {typeof props.children === 'string' ? (
+                <Text className="text-center">{props.children}</Text>
+            ) : (
+                props.children
+            )}
+        </TouchableOpacity>
     );
+
+    if(!href){
+        return output;
+    }else{
+        return(
+            <Link href={href ?? "/"} asChild>
+                {output}
+            </Link>
+        );
+    }
 }
 
 

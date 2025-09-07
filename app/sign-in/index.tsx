@@ -5,6 +5,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { SignInData, SignInSchema } from "@/types";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
+import { Stack } from 'expo-router';
 
 export default function About(){
     const {
@@ -26,6 +27,11 @@ export default function About(){
     const onSubmit = (data: FormData) => console.log(data);
     return(
         <SafeAreaProvider>
+            <Stack.Screen
+                options={{
+                    animation: "slide_from_bottom"
+                }}
+            />
             <SafeAreaView className="flex-1 bg-primary gap-8 py-8">
                 <Text className="w-screen text-center font-semibold text-5xl">Sign In</Text>
                 <View className="flex-1 items-center gap-4 px-10">
@@ -65,7 +71,9 @@ export default function About(){
                     />
                     {errors.password && <Text className="text-warning">Password is required.</Text>}
 
-                    <Button onPress={handleSubmit(onSubmit)} />
+                    <Button onPress={handleSubmit(onSubmit)}>
+                        <Text className="text-2xl font-semibold">Submit</Text>
+                    </Button>
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>

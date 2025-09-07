@@ -26,26 +26,16 @@ export default function Home() {
                             />
                         </View>
                         <Button
-                            accessibilityLabel="This button directs to the Sign In screen"
+                            href="/sign-in"
                             className="w-full"
                         >
-                            <Link
-                                href="/sign-in"
-                                className="text-3xl font-semibold"
-                            >
-                                Sign In
-                            </Link>
+                            <Text className="text-3xl font-semibold">Sign In</Text>
                         </Button>
                         <Button
-                            accessibilityLabel="This button directs to the Create Account screen"
+                            href="/create-account"
                             className="w-full"
                         >
-                            <Link
-                                href="/create-account"
-                                className="text-3xl font-semibold"
-                            >
-                                Create Account
-                            </Link>
+                            <Text className="text-3xl font-semibold">Create Account</Text>
                         </Button>
                     </View>
                 </View>
