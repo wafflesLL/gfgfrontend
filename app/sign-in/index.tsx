@@ -6,6 +6,8 @@ import { SignInData, SignInSchema } from "@/lib/types";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
 import { Stack } from 'expo-router';
+import { useEffect } from "react";
+import { apiFetchJSON } from "@/lib/server";
 
 export default function About(){
     const {
@@ -24,7 +26,27 @@ export default function About(){
         password: string;
     }
 
-    const onSubmit = (data: FormData) => console.log(data);
+    const onSubmit = async (data: FormData) => {
+        try {
+            const response = await apiFetchJSON("/sign-in", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password
+                })
+            })
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Sign In fetch failed:', error);
+            });
+            console.log(response);
+        }catch (error) {
+            console.error('Failed to Sign In', error);
+        }
+    };
     return(
         <SafeAreaProvider>
             <Stack.Screen
@@ -78,4 +100,8 @@ export default function About(){
             </SafeAreaView>
         </SafeAreaProvider>
     );
+}
+
+function onEffect(arg0: () => void, arg1: never[]) {
+    throw new Error("Function not implemented.");
 }

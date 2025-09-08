@@ -18,5 +18,5 @@ export default function App() {
         }
         fetchData();
     }, []);
-  return <ExpoRoot context={require.context('./app')} />;
+    return <ExpoRoot context={require.context('./app')} />;
 }
