@@ -1,11 +1,8 @@
 import { z } from 'zod';
 
 export const SignInSchema = z.object({
-        email: z
-            .string()
-            .trim()
-            .email("Enter a valid email.")
-            .transform(v => v.toLowerCase()),
+        username: z
+            .string(),
         password: z.string().min(1),
 });
 

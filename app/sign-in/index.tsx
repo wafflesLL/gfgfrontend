@@ -6,7 +6,6 @@ import { SignInData, SignInSchema } from "@/lib/types";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
 import { Stack } from 'expo-router';
-import { useEffect } from "react";
 import { apiFetchJSON } from "@/lib/server";
 
 export default function About(){
@@ -17,24 +16,24 @@ export default function About(){
     } = useForm<SignInData>({
         resolver: zodResolver(SignInSchema),
         defaultValues: {
-            email: "",
+            username: "",
             password: "",
         },
     })
     interface FormData {
-        email: string;
+        username: string;
         password: string;
     }
 
     const onSubmit = async (data: FormData) => {
         try {
-            const response = await apiFetchJSON("/sign-in", {
+            const response = await apiFetchJSON("/auth/token/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: data.email,
+                    username: data.username,
                     password: data.password
                 })
             })
@@ -64,15 +63,15 @@ export default function About(){
                         }}
                         render={({ field: { onChange, value } }) => (
                         <TextArea 
-                            title="Email Address"
+                            title="Username"
                             className="text-xl"
                             value={value}
                             onChange={onChange}
                         />
                         )}
-                        name="email"
+                        name="username"
                     />
-                    {errors.email && <Text className="text-warning">Enter a valid email.</Text>}
+                    {errors.username && <Text className="text-warning">Enter a valid email.</Text>}
 
                     <Controller
                         control={control}
@@ -100,8 +99,4 @@ export default function About(){
             </SafeAreaView>
         </SafeAreaProvider>
     );
-}
-
-function onEffect(arg0: () => void, arg1: never[]) {
-    throw new Error("Function not implemented.");
 }
