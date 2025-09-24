@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Stack } from 'expo-router';
 import { apiFetchJSON } from "@/lib/server";
 
-export default function About(){
+export default function SignIn(){
     const {
         control,
         handleSubmit,
@@ -66,6 +66,7 @@ export default function About(){
                             title="Username"
                             className="text-xl"
                             value={value}
+                            autoFocus={true}
                             onChange={onChange}
                         />
                         )}

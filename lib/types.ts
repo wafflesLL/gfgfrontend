@@ -8,8 +8,15 @@ export const SignInSchema = z.object({
 
 export type SignInData = z.infer<typeof SignInSchema>;
 
-export interface ApiResponse {
-    // Add properties based on your API response structure
-    id: string;
-    // ... other properties
-}
+export const CreateAccountSchema = z.object({
+        username: z
+            .string(),
+        email: z
+            .string()
+            .trim()
+            .email("Enter a valid email.")
+            .transform(v => v.toLowerCase()),
+        password: z.string().min(1),
+});
+
+export type CreateAccountData = z.infer<typeof CreateAccountSchema>;

@@ -17,6 +17,7 @@ interface TextAreaProps {
     keyboardType?: keyboards;
     autoCapitalize?: autoCapitalizes;
     value?: string;
+    autoFocus?: boolean;
     onChange?: (text: string) => void;
 }
 //reference https://reactnative.dev/docs/textinput
@@ -33,6 +34,7 @@ function TextArea({
     keyboardType = 'default',
     autoCapitalize = 'none',
     value = "", 
+    autoFocus = false,
     onChange = (text: string) => {""},
 }:TextAreaProps){
     return(
@@ -54,7 +56,7 @@ function TextArea({
                     keyboardType={keyboardType}
                     secureTextEntry={Password}
                     autoCapitalize={autoCapitalize}
-                    autoFocus={true}
+                    autoFocus={autoFocus}
                     passwordRules="minlength: 20,required: lower; required: upper; required: digit; required: [!#%&*=@^_];"
                 />
             </View>
