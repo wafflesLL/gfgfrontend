@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Stack, useRouter } from 'expo-router';
 import { apiFetchJSON } from "@/lib/server";
 import { useState } from "react";
+import { saveRefreshToken } from "@/lib/keychain";
 
 export default function SignIn(){
     const [errorMessage, setErrorMessage] = useState("");
@@ -50,6 +51,7 @@ export default function SignIn(){
             if (!response.access){
                 setErrorMessage("Sign in failed. Please check your credentials.")
             }else{
+                saveRefreshToken(response.refresh);
                 router.replace("/dashboard");
             }
             console.log(response);
