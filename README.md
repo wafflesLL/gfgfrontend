@@ -2,6 +2,7 @@
 
 ## Tech Stack
 * React Native Expo Dev framework
+* React Navigation
 * nativewindcss for CSS
 
 ## Description
