@@ -1,5 +1,5 @@
-import { View, TouchableOpacityProps, TouchableOpacity, Text} from "react-native";
-import { Link } from "expo-router";
+import {useNavigation } from "@react-navigation/native";
+import {TouchableOpacityProps, TouchableOpacity, Text, GestureResponderEvent} from "react-native";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
 
@@ -24,27 +24,26 @@ function Button({
     href,
     ...props
 }: ButtonProps) {
+    const navigation = useNavigation();
     const variantClass = buttonVariants[variant] || buttonVariants.primary;
 
-    const output = (
-        <TouchableOpacity className={`${variantClass} ${className} p-[${size}]`} {...props}>
+    const handlePress = (event: GestureResponderEvent) => {
+        if (href) {
+            navigation.navigate(href as never);
+        }
+        if (props.onPress){
+            props.onPress(event);
+        }
+    }
+    return(
+        <TouchableOpacity className={`${variantClass} ${className} p-[${size}]`} onPress={handlePress} {...props}>
             {typeof props.children === 'string' ? (
                 <Text className="text-center">{props.children}</Text>
             ) : (
                 props.children
             )}
         </TouchableOpacity>
-    );
-
-    if(!href){
-        return output;
-    }else{
-        return(
-            <Link href={href ?? "/"} asChild>
-                {output}
-            </Link>
-        );
-    }
+    )
 }
 
 

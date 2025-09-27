@@ -1,7 +1,6 @@
-import { GFG_API_KEY, GFG_API_URL } from "@env";
+import { GFG_API_URL } from "@env";
 
 export async function apiFetchJSON(path: string, options: RequestInit = {}) {
-    // Validate API key exists
 
     if (!GFG_API_URL) {
         throw new Error("GFG_API_URL is not defined in environment variables");

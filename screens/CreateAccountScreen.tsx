@@ -1,12 +1,11 @@
-import { TextArea } from "@/components/ui/TextArea";
+import { TextArea } from "../components/ui/TextArea";
 import { Text, View } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { CreateAccountData, CreateAccountSchema } from "@/lib/types";
+import { CreateAccountData, CreateAccountSchema } from "../lib/types";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@/components/ui/Button';
-import { Stack } from 'expo-router';
-import { apiFetchJSON } from "@/lib/server";
+import { Button } from '../components/ui/Button';
+import { apiFetchJSON } from "../lib/server";
 import { useState } from "react";
 
 export default function CreateAccount(){
@@ -58,11 +57,6 @@ export default function CreateAccount(){
     };
     return(
         <SafeAreaProvider>
-            <Stack.Screen
-                options={{
-                    animation: "slide_from_bottom"
-                }}
-            />
             <SafeAreaView className="flex-1 bg-primary gap-8 py-8">
                 <Text className="w-screen text-center font-semibold text-5xl">Create Account</Text>
                 <View className="flex-1 items-center gap-4 px-10">
