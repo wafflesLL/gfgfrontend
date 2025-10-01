@@ -1,5 +1,5 @@
 import { useMemo, useRef, createContext, useContext, useEffect, useState } from 'react';
-import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import * as SecureStore from 'expo-secure-store'
 import { GFG_API_URL } from '@env';
 
@@ -17,12 +17,15 @@ const AuthContext = createContext<AuthProps>({});
 //JWT decoder for the expiry
 function decodeJwt<T = any>(token: string): T | null {
     try {
-        const [, payload] = token.split('.');
-        const expiration =  JSON.parse(Buffer.from(payload.replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString());
-        console.log(`expiration in ${expiration}`);
-        return expiration;
+        const parts = token.split('.');
+        if (parts.length !== 3) return null;
+        const payload = parts[1];
+        let base64Payload = payload.replace(/-/g, '+').replace(/_/g, '/');
+        // Add padding if necessary
+        base64Payload += '='.repeat((4 - base64Payload.length % 4) % 4);
+        const decodedString = atob(base64Payload);
+        return JSON.parse(decodedString);
     } catch {
-        console.log("expiration parsing failed")
         return null;
     }
 }
@@ -54,7 +57,6 @@ export const AuthProvider = ({children}: any) => {
 
     //refresh helper
     const refreshAccessToken = async (): Promise<string | null> => {
-        console.log("refreshing access token...");
         if (isRefreshingRef.current && refreshPromiseRef.current){
             return refreshPromiseRef.current;
         }
@@ -152,7 +154,6 @@ export const AuthProvider = ({children}: any) => {
 
     //This useEffect takes the refresh token we already had and sees if it is still valid
     useEffect(() => {
-        console.log("checking for previous refresh token");
         (async () => {
             const hasRefresh = await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
             if (hasRefresh) {
