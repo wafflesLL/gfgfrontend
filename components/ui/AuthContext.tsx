@@ -18,8 +18,11 @@ const AuthContext = createContext<AuthProps>({});
 function decodeJwt<T = any>(token: string): T | null {
     try {
         const [, payload] = token.split('.');
-        return JSON.parse(Buffer.from(payload.replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString());
+        const expiration =  JSON.parse(Buffer.from(payload.replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString());
+        console.log(`expiration in ${expiration}`);
+        return expiration;
     } catch {
+        console.log("expiration parsing failed")
         return null;
     }
 }
@@ -147,7 +150,9 @@ export const AuthProvider = ({children}: any) => {
         };
     }, [authState.accessToken]);
 
+    //This useEffect takes the refresh token we already had and sees if it is still valid
     useEffect(() => {
+        console.log("checking for previous refresh token");
         (async () => {
             const hasRefresh = await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
             if (hasRefresh) {
@@ -203,7 +208,7 @@ export const AuthProvider = ({children}: any) => {
         try{
             const refresh = await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
             if (refresh) {
-                await axios.post(`${API_URL}/auth/token/blacklist/`, { refresh });
+                await axios.post(`${API_URL}/api/auth/token/blacklist/`, { refresh });
             }
         } catch {
         } finally {
