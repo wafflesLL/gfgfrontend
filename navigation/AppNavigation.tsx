@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import ResetPassword from '../screens/ResetPasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,11 @@ export default function AppNavigation(){
                         <Stack.Screen
                             name="CreateAccount"
                             component={CreateAccountScreen}
+                            options={{ headerShown:false }}
+                        />                    
+                        <Stack.Screen
+                            name="ResetPassword"
+                            component={ResetPassword}
                             options={{ headerShown:false }}
                         />                    
                     </>
