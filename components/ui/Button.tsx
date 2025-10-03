@@ -11,7 +11,7 @@ interface ButtonProps extends TouchableOpacityProps {
 }
 
 const buttonVariants: Record<ButtonVariant, string> = {
-    primary: "bg-secondary border border-foregroun py-4 px-8 border-[5px] rounded-[20px] flex-2 items-center justify-center",
+    primary: "bg-foreground py-4 px-4 rounded-[20px] flex-2 items-center justify-center",
     secondary: "",
     danger: "",
     ghost: "",
@@ -38,7 +38,7 @@ function Button({
     return(
         <TouchableOpacity className={`${variantClass} ${className} p-[${size}]`} onPress={handlePress} {...props}>
             {typeof props.children === 'string' ? (
-                <Text className="text-center">{props.children}</Text>
+                <Text className="text-center text-background text-xl font-bold">{props.children}</Text>
             ) : (
                 props.children
             )}
