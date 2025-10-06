@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useAuth } from '../components/ui/AuthContext';
 import Svg, { Path } from "react-native-svg";
 import { Link } from "@react-navigation/native";
+import NavBar from "../components/ui/NavBar";
 
 export default function SignIn(){
     const [username, setUsername] = useState('');
@@ -22,10 +23,11 @@ export default function SignIn(){
     return(
         <>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View className="bg-background flex justify-centers items-center h-screen">
+                <View className="bg-background flex justify-center items-center h-screen">
                     <Svg width="393" height="172" viewBox="0 0 393 172" fill="none">
                         <Path d="M394 149.5C301.515 54.824 66.5 231 0 149.5C3.8147e-05 101.35 0 51.7348 0 1.94973e-05C85.5 -2.43717e-05 284.573 1.94973e-05 393 1.94973e-05C393 78.5 393 87.1499 393 149.5Z" fill="#D9A362"/>
                     </Svg>
+                    <NavBar/>
                     <SafeAreaProvider>
                         <SafeAreaView className="flex-1 gap-2 py-2">
                             <Text className="w-screen text-center font-semibold text-5xl">Sign In</Text>

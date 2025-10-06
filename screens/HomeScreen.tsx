@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import { Button } from '../components/ui/Button';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
+import NavBar from '../components/ui/NavBar';
 
 export default function Welcome() {
     return(

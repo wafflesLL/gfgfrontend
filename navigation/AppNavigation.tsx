@@ -14,13 +14,16 @@ export default function AppNavigation(){
     const { authState } = useAuth();
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+            >
                 {authState?.authenticated ? (
                     <>
                         <Stack.Screen
                             name="Dashboard"
                             component={DashboardScreen}
-                            options={{ headerShown:false }}
+                            options={{
+                                headerShown: false,
+                            }}
                         />                    
                     </>
 
@@ -29,22 +32,30 @@ export default function AppNavigation(){
                         <Stack.Screen
                             name="Home"
                             component={HomeScreen}
-                            options={{ headerShown:false }}
+                            options={{
+                                headerShown: false,
+                            }}
                         />                    
                         <Stack.Screen
                             name="SignIn"
                             component={SignInScreen}
-                            options={{ headerShown:false }}
+                            options={{
+                                headerShown: false,
+                            }}
                         />                    
                         <Stack.Screen
                             name="CreateAccount"
                             component={CreateAccountScreen}
-                            options={{ headerShown:false }}
+                            options={{
+                                headerShown: false,
+                            }}
                         />                    
                         <Stack.Screen
                             name="ResetPassword"
                             component={ResetPassword}
-                            options={{ headerShown:false }}
+                            options={{
+                                headerShown: false,
+                            }}
                         />                    
                     </>
                 )}
