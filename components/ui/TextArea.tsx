@@ -39,7 +39,7 @@ function TextArea({
     return(
         <View className="flex flex-col items-left gap-2 w-full">
             <Text className={`${className} font-bold`}>{title}</Text>
-            <View className="border w-full border-[5px] rounded-[20px] p-4">
+            <View className="border w-full border-[5px] rounded-full p-4">
                 <TextInput
                     multiline={multiline} // This prop enables multi-line input
                     numberOfLines={numberOfLines}

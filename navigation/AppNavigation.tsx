@@ -7,6 +7,7 @@ import SignInScreen from '../screens/SignInScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import ResetPassword from '../screens/ResetPasswordScreen';
+import VerifyEmail from '../screens/VerifyEmailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,13 @@ export default function AppNavigation(){
                         <Stack.Screen
                             name="ResetPassword"
                             component={ResetPassword}
+                            options={{
+                                headerShown: false,
+                            }}
+                        />                    
+                        <Stack.Screen
+                            name="VerifyEmail"
+                            component={VerifyEmail}
                             options={{
                                 headerShown: false,
                             }}

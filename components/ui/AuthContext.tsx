@@ -179,7 +179,16 @@ export const AuthProvider = ({children}: any) => {
         try {
             return await axios.post(`${API_URL}/api/auth/register/`, { username, email, password })
         } catch (e: any){
-            return { error: true, msg: e?.response?.data?.msg ?? 'Registration Failed' };
+            const errorData = e?.response?.data;
+            let msg = 'Registration Failed';
+            if (errorData) {
+                if (typeof errorData === 'string') {
+                    msg = errorData;
+                } else if (typeof errorData === 'object') {
+                    msg = Object.values(errorData).flat().join(' ');
+                }
+            }
+            return { error: true, msg };
         }
     }
     
