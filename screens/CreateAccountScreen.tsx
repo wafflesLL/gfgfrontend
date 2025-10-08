@@ -2,6 +2,7 @@ import { TextArea } from "../components/ui/TextArea";
 import { Text, TouchableWithoutFeedback, View, Keyboard} from "react-native"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Button } from '../components/ui/Button';
+import Checkbox from '../components/ui/Checkbox';
 import NavBar from "../components/ui/NavBar";
 import Svg, { Path } from 'react-native-svg';
 import {useState} from 'react';
@@ -56,9 +57,8 @@ export default function CreateAccount(){
                                     title="Password"
                                     Password={true}
                                 />
-                                <Button onPress={() => {
-                                    register();
-                                }}
+                                <Checkbox/>
+                                <Button onPress={register}
                                 className="w-[60%]">
                                     <Text className="text-center text-background text-xl font-bold">Create Account</Text>
                                 </Button>
